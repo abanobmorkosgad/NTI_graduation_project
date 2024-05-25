@@ -18,9 +18,9 @@ pipeline {
                         usernamePassword(credentialsId: 'ecr-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')
                     ]){
                         sh "docker login -u ${USER} -p ${PASS} ${REPO_SERVER}"
-                        sh "docker build websit/backend/. -t ${REPO_NAME_BACKEND}-${IMAGE_VERSION}"
+                        sh "docker build app/backend/. -t ${REPO_NAME_BACKEND}-${IMAGE_VERSION}"
                         sh "docker push ${REPO_NAME_BACKEND}:${IMAGE_VERSION}"
-                        sh "docker build websit/frontend/. -t ${REPO_NAME_FRONTEND}-${IMAGE_VERSION}"
+                        sh "docker build app/frontend/. -t ${REPO_NAME_FRONTEND}-${IMAGE_VERSION}"
                         sh "docker push ${REPO_NAME_FRONTEND}:${IMAGE_VERSION}"
                     }
                 }
