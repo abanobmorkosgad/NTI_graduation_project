@@ -42,11 +42,11 @@ spec:
               name: postgres-secret
               key: database
 
-      # Ensure that the backend waits for the database to be ready
-      initContainers:
-      - name: wait-for-db
-        image: busybox
-        command: ['sh', '-c', 'until nc -z db 5432; do echo waiting for db; sleep 2; done;']
+      # # Ensure that the backend waits for the database to be ready
+      # initContainers:
+      # - name: wait-for-db
+      #   image: busybox
+      #   command: ['sh', '-c', 'until nc -z db 5432; do echo waiting for db; sleep 2; done;']
 
 --- 
 
