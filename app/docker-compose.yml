@@ -13,7 +13,6 @@ services:
       - db_data:/var/lib/postgresql/data
     networks:
       - app-network
-   # command: bash -c "rm -rf /var/lib/postgresql/data/* && docker-entrypoint.sh postgres"
 
   backend:
     build:
