@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "secret" {
-  name = "secret-manager"
+  name = "secretmanager2"
 }
 
 resource "aws_secretsmanager_secret_version" "example" {

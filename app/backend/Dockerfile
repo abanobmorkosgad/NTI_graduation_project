@@ -1,13 +1,21 @@
-FROM node:14
+FROM node:14 as build
 
 WORKDIR /app
 
-COPY package.json  /app/
+COPY package*.json ./
 
 RUN npm install
 
-COPY . /app/
+COPY . .
 
-EXPOSE 3000
+FROM nginx:alpine
 
-CMD ["npm", "start"]
+COPY --from=build /app /app
+
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+RUN apk add --no-cache nodejs npm
+
+EXPOSE 80
+
+CMD ["sh", "-c", "node /app/index.js && nginx -g 'daemon off;'"]

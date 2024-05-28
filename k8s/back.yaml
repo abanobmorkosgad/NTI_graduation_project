@@ -15,6 +15,7 @@ spec:
       containers:
       - name: backend
         image: abanobmorkos10/backend
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         env:
@@ -42,11 +43,11 @@ spec:
               name: postgres-secret
               key: database
 
-      # # Ensure that the backend waits for the database to be ready
-      # initContainers:
-      # - name: wait-for-db
-      #   image: busybox
-      #   command: ['sh', '-c', 'until nc -z db 5432; do echo waiting for db; sleep 2; done;']
+      # Ensure that the backend waits for the database to be ready
+      initContainers:
+      - name: wait-for-db
+        image: busybox
+        command: ['sh', '-c', 'until nc -z db 5432; do echo waiting for db; sleep 2; done;']
 
 --- 
 
@@ -60,5 +61,4 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 3000
-  type: LoadBalancer
+    targetPort: 80
