@@ -10,10 +10,10 @@ pipeline {
 
     stages {
 
-        stage("build image") {
+        stage("build image and push to ECR") {
             steps {
                 script {
-                    echo "building docker images ..."
+                    echo "building and pushing docker images ..."
                     withCredentials([
                         usernamePassword(credentialsId: 'ecr-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')
                     ]){
